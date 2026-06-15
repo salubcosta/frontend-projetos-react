@@ -41,7 +41,8 @@ npm start
 A aplicação estará disponível em `http://localhost:3000`.
 
 <hr>
-A partir daqui, é documentação padrão do comando `npm init react-app frontend-projetos-react`
+A partir daqui, é documentação padrão do comando <code>npm init react-app frontend-projetos-react</code>
+
 
 # Getting Started with Create React App
 
