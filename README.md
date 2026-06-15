@@ -22,15 +22,15 @@ Em construção...
 
 ### Pré-requisitos
 
-- [Node.js](https://nodejs.org/) v16 ou superior
+- [Node.js](https://nodejs.org/) v20 ou superior
 - npm (incluso com Node.js)
 
 ### Passos
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/atividades-projetos.git
-cd atividades-projetos
+git clone https://github.com/salubcosta/frontend-projetos-react.git
+cd frontend-projetos-react
 
 # 2. Instale as dependências
 npm install
@@ -41,7 +41,7 @@ npm start
 A aplicação estará disponível em `http://localhost:3000`.
 
 <hr>
-A partir daqui, é documentação padrão do comando `npm init react-app frontend-projetos`
+A partir daqui, é documentação padrão do comando `npm init react-app frontend-projetos-react`
 
 # Getting Started with Create React App
 
