@@ -1,3 +1,48 @@
+# Atividades por Projetos
+
+Aplicação React para gerenciamento de atividades organizadas por projetos e categorias.
+
+## Descrição
+
+O sistema permite cadastrar **categorias**, **projetos** (vinculados a categorias) e **atividades** (vinculadas a projetos), com operações completas de criação, edição e exclusão. Os dados são carregados a partir de um arquivo JSON local (simulando chamadas a um servidor).
+
+## Tecnologias
+
+- React 19
+- React Router DOM v7
+- JavaScript
+- CSS por componente
+
+## Estrutura de Pastas
+
+```
+Em construção...
+```
+## Instalação e Execução
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/) v16 ou superior
+- npm (incluso com Node.js)
+
+### Passos
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/atividades-projetos.git
+cd atividades-projetos
+
+# 2. Instale as dependências
+npm install
+
+# 3. Inicie o servidor de desenvolvimento
+npm start
+```
+A aplicação estará disponível em `http://localhost:3000`.
+
+<hr>
+A partir daqui, é documentação padrão do comando `npm init react-app frontend-projetos`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
