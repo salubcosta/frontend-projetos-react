@@ -1,9 +1,33 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+
+// Importação de páginas
+import Home from './pages/Home';
+
+// Hooks
+import useData from './hooks/useData';
+
 import './App.css';
 
-export default function App() {
+const App = () => {
+
+    const { dados } = useData();
+
     return (
-        <>
-        Hello, world
-        </>
+        <BrowserRouter>
+            {/* Header vai aparecer em todas as páginas*/}
+            <Header />
+
+            <main>
+                {/* Organização das páginas por rotas */}
+                <Routes>
+                    {/* Página inicial */}
+                    <Route path="/" element={<Home dados={dados} />} />
+                </Routes>
+            </main>
+        </BrowserRouter>
     );
 }
+
+export default App;
