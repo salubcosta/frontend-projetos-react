@@ -1,0 +1,75 @@
+/* Home */
+.home-header {
+    background: #111;
+    padding: 56px 24px;
+    text-align: center;
+}
+.home-titulo {
+    color: #ccc;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+.home-destaque {
+    color: lime;
+    font-weight: 600;
+}
+.home-subtitulo {
+    color: #777;
+    font-size: 0.95rem;
+}
+/* Cards */
+.home-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 32px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    flex: 1;
+    min-width: 200px;
+    cursor: pointer;
+    border-top: 4px solid #111;
+    transition: box-shadow 0.2s;
+}
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.card-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 4px;
+}
+.card-total {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+.card-descricao {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+.card-link {
+    font-size: 0.85rem;
+    color: #111;
+    font-weight: 500;
+}
+/* trabalhando responsividade */
+@media (max-width: 600px) {
+  .home-titulo { font-size: 1.3rem; }
+  .home-cards  { padding: 20px 16px; }
+}
+@media (max-width: 500px) {
+    .card-titulo { font-size: 1.3rem; }
+    .home-cards  { 
+        flex-direction: column;
+    }
+}
