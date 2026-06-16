@@ -1,0 +1,20 @@
+{
+  "categorias": [
+    { "id": 1, "nome": "Desenvolvimento" },
+    { "id": 2, "nome": "Idioma" },
+    { "id": 3, "nome": "Prototipação" },
+    { "id": 4, "nome": "Leitura" }
+  ],
+  "projetos": [
+    { "id": 1, "nome": "Site Institucional", "descricao": "Criação do novo site da empresa com foco em conversão.", "categoria": { "id": 1, "nome": "Desenvolvimento" } },
+    { "id": 2, "nome": "Estudo de Inglês 2026", "descricao": "Estudar todos os dias inglês, seja traduzindo textos ou ouvindo podcasts.", "categoria": { "id": 2, "nome": "Idioma" } },
+    { "id": 3, "nome": "Prototipação MVP Sprint 1", "descricao": "Estratégia de marketing digital para novo produto.", "categoria": { "id": 3, "nome": "Prototipação" } },
+    { "id": 4, "nome": "Leitura Scrum Guide", "descricao": "Leitura do guia Scrum.", "categoria": { "id": 4, "nome": "Leitura" } }
+  ],
+  "atividades": [
+    { "id": 1, "descricao": "Levantamento de requisitos com o cliente", "data": "2025-01-10T10:00:00", "projeto": { "id": 1, "nome": "Site Institucional" } },
+    { "id": 2, "descricao": "Configuração do ambiente de desenvolvimento", "data": "2025-01-12T14:00:00", "projeto": { "id": 1, "nome": "Site Institucional" } },
+    { "id": 3, "descricao": "Criação de layout no figma iniciais", "data": "2025-01-15T09:00:00", "projeto": { "id": 3, "nome": "Prototipação MVP Sprint 1" } },
+    { "id": 4, "descricao": "Leitura da introdução ao Scrum", "data": "2025-01-16T11:00:00", "projeto": { "id": 4, "nome": "Leitura Scrum Guide" } }
+  ]
+}
