@@ -1,25 +1,30 @@
+// Home.jsx
+// Página inicial com resumo de cada seçãoda aplicação
+// 
+// Hook de navegação usado aqui:
+// useNavigate - redireciona para outra rota quando o usuário clica em um card
+
 import { useNavigate } from 'react-router-dom';
+import Card from '../components/Card';
 import './Home.css';
 
-const Home = ({ dados }) => {
+const Home = ({ categorias, projetos, atividades }) => {
     const navigate = useNavigate();
 
     const cards = [
         {
             titulo: 'Categorias',
-            descricao: 'Agrupe seus projetos por categoria',
-            total: dados.categorias.length,
+            descricao: `${categorias.length} cadastrada(s) - Agrupe seus projetos por categoria.`,
             rota: '/categorias'
         }, {
             titulo: 'Projetos',
-            descricao: 'Gerencie projetos vinculados à categoria',
-            total: dados.projetos.length,
+            descricao: `${projetos.length} cadastrado(s) - Gerencie projetos vinculados à categoria.`,
             rota: '/projetos'
         }, {
             titulo: 'Atividades',
-            descricao: 'Registre tarefas realizadas em cada projeto',
-            total: dados.atividades.length,
-            rota: '/atividades'
+            descricao: `${atividades.length} cadastrada(s) - Acesso um projeto para ver suas atividades.`,
+            
+            rota: '/projetos'
         },
     ];
 
@@ -33,19 +38,26 @@ const Home = ({ dados }) => {
                 <p className='home-subtitulo'>Organize categorias, projetos e atividades em um só lugar.</p>
             </div>
             {/* Cards de navegação */}
-            <div className='home-cards'>
+            <div className='home-grid'>
                 {
                     cards.map(card => (
-                        <div key={card.titulo} className='card' onClick={()=> navigate(card.rota)}>
-                            <h2 className='card-titulo'>{card.titulo}</h2>
-                            <p className='card-total'>{card.total} {card.titulo.toLowerCase()}</p>
-                            <p className='card-descricao'>{card.descricao}</p>
-                            <span className='card-link'>Ver todos</span>
-                        </div>
+                        <Card 
+                            key={card.titulo}
+                            titulo={card.titulo}
+                            subtitulo={card.descricao}
+                            onClick={()=>navigate(card.rota)}
+                            rodape={
+                                <button 
+                                    className='btn btn-secondary'
+                                    onClick={()=>navigate(card.rota)}
+                                >
+                                    Ver todos
+                                </button>
+                            }
+                        />
                     ))
                 }
             </div>
-            {console.log(dados)}
         </div>
     );
 };
