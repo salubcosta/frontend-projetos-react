@@ -30,6 +30,16 @@
 }
 /* trabalhando responsividade */
 @media (max-width: 600px) {
-  .home-titulo { font-size: 1.3rem; }
-  .home-grid { padding: 20px 16px;}
+    .home-titulo { 
+        font-size: 1.3rem; 
+    }
+    .home-grid { 
+        padding: 20px 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .home-grid { 
+        grid-template-columns: 1fr;
+    }
 }
