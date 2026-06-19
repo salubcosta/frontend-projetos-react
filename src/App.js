@@ -31,7 +31,9 @@ const App = () => {
         }, 300);
     }, []);
 
-    // ################ CATEGORIAS ################
+    // ###############################################################
+    // CATEGORIAS 
+    // ###############################################################
 
     const adicionarCategoria = (nome) => {
         const nova = { id: Date.now(), nome };
@@ -55,11 +57,42 @@ const App = () => {
         setCategorias((prev) => prev.filter((c) => c.id !== id));
     };
 
+    // ###############################################################
+    // PROJETOS 
+    // ###############################################################
+
+    const adicionarProjeto = (nome, descricao, categoria) => {
+        // categoria aqui já é o objeto { id, nome } vindo do formulário
+        const novo = { id: Date.now(), nome, descricao, categoria };
+        setProjetos((prev) => [...prev, novo]);
+    };
+
+    const editarProjeto = (id, nome, descricao, categoria) => {
+        setProjetos((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, nome, descricao, categoria } : p))
+        );
+        // Atualiza o campo projeto dentro das atividades desse projeto
+        setAtividades((prev) =>
+        prev.map((a) =>
+            a.projeto.id === id ? { ...a, projeto: { id, nome } } : a
+        )
+        );
+    };
+
+    const excluirProjeto = (id) => {
+        setProjetos((prev) => prev.filter((p) => p.id !== id));
+    };
+
+    // ###############################################################
     // Agrupa os handlers em um objeto p/ passar limpo para AppRoutes
+    // ###############################################################
     const handlers = {
         adicionarCategoria,
         editarCategoria,
-        excluirCategoria
+        excluirCategoria,
+        adicionarProjeto,
+        editarProjeto,
+        excluirProjeto
     }
 
     return (
