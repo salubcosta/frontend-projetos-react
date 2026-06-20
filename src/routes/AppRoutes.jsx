@@ -7,6 +7,8 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Categorias     from '../pages/Categorias';
 import Projetos from '../pages/Projetos';
+import ProjetoDetalhe from '../pages/ProjetoDetalhe';
+import NotFound from '../pages/NotFound';
 
 const AppRoutes = ( { categorias, projetos, atividades, handlers }) => {
     return (
@@ -50,6 +52,27 @@ const AppRoutes = ( { categorias, projetos, atividades, handlers }) => {
                         onExcluir={handlers.excluirProjeto}
                     />
                 }
+            />
+            {/* Rota de projetos por ID e detalhes (as atividades de cada projeto) */}
+            {/* :id é o parâmetro dinâmico lido com useParams em ProjetoDetalhe */}
+            <Route
+                path="/projetos/:id"
+                element={
+                <ProjetoDetalhe
+                    projetos={projetos}
+                    categorias={categorias}
+                    atividades={atividades}
+                    onAdicionarAtividade={handlers.adicionarAtividade}
+                    onEditarAtividade={handlers.editarAtividade}
+                    onExcluirAtividade={handlers.excluirAtividade}
+                />
+                }
+            />
+
+            {/* Rota 404 - captura qualquer URL não mapeada acima */}
+            <Route 
+                path="*" 
+                element={<NotFound />} 
             />
         </Routes>
     );
