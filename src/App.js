@@ -84,6 +84,31 @@ const App = () => {
     };
 
     // ###############################################################
+    // Atividades do projeto 
+    // ###############################################################
+
+    const adicionarAtividade = (descricao, projeto) => {
+        // projeto aqui é o objeto { id, nome } vindo do formulário
+        const nova = {
+        id: Date.now(),
+        descricao,
+        data: new Date().toISOString(),
+        projeto,
+        };
+        setAtividades((prev) => [...prev, nova]);
+    };
+
+    const editarAtividade = (id, descricao) => {
+        setAtividades((prev) =>
+        prev.map((a) => (a.id === id ? { ...a, descricao } : a))
+        );
+    };
+
+    const excluirAtividade = (id) => {
+        setAtividades((prev) => prev.filter((a) => a.id !== id));
+    };
+
+    // ###############################################################
     // Agrupa os handlers em um objeto p/ passar limpo para AppRoutes
     // ###############################################################
     const handlers = {
@@ -92,7 +117,10 @@ const App = () => {
         excluirCategoria,
         adicionarProjeto,
         editarProjeto,
-        excluirProjeto
+        excluirProjeto,
+        adicionarAtividade,
+        editarAtividade,
+        excluirAtividade
     }
 
     return (
