@@ -12,6 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import Header from './components/Header';
 import AppRoutes from './routes/AppRoutes';
+import Rodape from "./components/Rodape";
 
 import dados from './data/dados.json';
 
@@ -134,6 +135,7 @@ const App = () => {
                     handlers={handlers}
                 />
             </main>
+            <Rodape />
         </BrowserRouter>
     );
 }
