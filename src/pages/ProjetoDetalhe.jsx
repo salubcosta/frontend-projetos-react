@@ -11,6 +11,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import Card  from '../components/Card';
 import Alert from '../components/Alert';
+import PageHeader from '../components/PageHeader';
+import ListaVazia from '../components/ListaVazia';
+
 import './Style.css';
 
 function ProjetoDetalhe({ projetos, atividades, onAdicionarAtividade, onEditarAtividade, onExcluirAtividade }) {
@@ -102,23 +105,25 @@ function ProjetoDetalhe({ projetos, atividades, onAdicionarAtividade, onEditarAt
         >
             ← Voltar para Projetos
         </button>
+        
+        {/* Cabeçalho da página — reutiliza PageHeader */}
+        <PageHeader
+            titulo={projeto.nome}
+            subtitulo={`${projeto.categoria.nome} · ${atividadesDoProjeto.length} atividade(s)`}
+            acao={
+                modo === 'lista' && (
+                    <button className="btn btn-primario" onClick={abrirFormNovo}>
+                        + Nova atividade
+                    </button>
+                )
+            }
+        />
 
-        <div className="pagina-header">
-            <div>
-            <h1 className="pagina-titulo">{projeto.nome}</h1>
-            <p className="pagina-subtitulo">
-                {projeto.categoria.nome} · {atividadesDoProjeto.length} atividade(s)
-            </p>
-            <p style={{ fontSize: '0.9rem', color: '#555', marginTop: 6 }}>
-                {projeto.descricao}
-            </p>
-            </div>
-            {modo === 'lista' && (
-            <button className="btn btn-primario" onClick={abrirFormNovo}>
-                + Nova atividade
-            </button>
-            )}
-        </div>
+        {/* Descrição do projeto — exibida abaixo do PageHeader */}
+        <p style={{ fontSize: '0.9rem', color: '#555', marginTop: -16, marginBottom: 20 }}>
+            {projeto.descricao}
+        </p>
+
 
         <Alert tipo={alerta?.tipo} mensagem={alerta?.mensagem} />
 
@@ -126,7 +131,8 @@ function ProjetoDetalhe({ projetos, atividades, onAdicionarAtividade, onEditarAt
         {modo === 'lista' && (
             <div className="lista-grid">
             {atividadesDoProjeto.length === 0 && (
-                <p className="lista-vazia">Nenhuma atividade registrada neste projeto.</p>
+                // Componente reutilizável apenas para informar mensagem ao usuário
+                <ListaVazia mensagem={"Nenhuma atividade registrada neste projeto. :("} />
             )}
             {atividadesDoProjeto.map((ativ) => (
                 <Card
