@@ -22,8 +22,7 @@ const Home = ({ categorias, projetos, atividades }) => {
             rota: '/projetos'
         }, {
             titulo: 'Atividades',
-            descricao: `${atividades.length} cadastrada(s) - Acesso um projeto para ver suas atividades.`,
-            
+            descricao: `${atividades.length} cadastrada(s) - Acesse um projeto para ver suas atividades.`,
             rota: '/projetos'
         },
     ];
