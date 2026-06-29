@@ -13,11 +13,76 @@ O sistema permite cadastrar **categorias**, **projetos** (vinculados a categoria
 - JavaScript
 - CSS por componente
 
+## Funcionalidades
+
+- **Categorias** — listar, adicionar, editar e excluir. Proteção contra exclusão de categoria em uso por algum projeto.
+- **Projetos** — listar com filtro por categoria, adicionar, editar e excluir. Proteção contra exclusão de projeto que possui atividades. Clique em um projeto navega para o detalhe.
+- **Atividades** — gerenciadas dentro do detalhe de cada projeto; permite adicionar, editar e excluir atividades vinculadas ao projeto.
+- **Navegação integrada** — ao clicar em "Ver projetos" em uma categoria, a página de Projetos abre já filtrada por aquela categoria (via `useNavigate` / `state`). Ao criar um projeto sem categoria cadastrada, há atalho direto para criar uma.
+- **Alertas temporários** — feedback visual (sucesso, aviso, erro) com auto-dismiss em 3 segundos.
+- **Estado vazio** — componente `ListaVazia` exibido quando não há itens na lista.
+
 ## Estrutura de Pastas
 
 ```
-Em construção...
+frontend-projetos/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── outros arquivos gerados na criação do projeto react
+├── src/
+│   ├── App.js               # Raiz: estado global e handlers CRUD
+│   ├── App.css
+│   ├── index.js
+│   ├── components/
+│   │   ├── Header.jsx       # Cabeçalho com título e navegação
+│   │   ├── Header.css
+│   │   ├── Navigation.jsx   # Links de navegação com link ativo
+│   │   ├── Navigation.css
+│   │   ├── Card.jsx         # Card reutilizável (título, subtítulo, rodapé)
+│   │   ├── Card.css
+│   │   ├── Alert.jsx        # Alerta de feedback (sucesso / aviso / erro)
+│   │   ├── Alert.css
+│   │   ├── PageHeader.jsx   # Cabeçalho de página (título + subtítulo + ação)
+│   │   ├── ListaVazia.jsx   # Mensagem quando a lista está vazia
+│   │   └── Rodape.jsx       # Rodapé da aplicação
+│   ├── data/
+│   │   └── dados.json       # Dados iniciais (categorias, projetos, atividades)
+│   ├── pages/
+│   │   ├── Home.jsx         # Página hoje com resumo de categorias, projetos e atividades
+│   │   ├── Home.css
+│   │   ├── Categorias.jsx   # CRUD de categorias
+│   │   ├── Projetos.jsx     # CRUD de projetos com filtro por categoria
+│   │   ├── ProjetoDetalhe.jsx # Detalhe do projeto + CRUD de atividades
+│   │   ├── NotFound.jsx     # Página 404
+│   │   ├── NotFound.css
+│   │   └── Style.css        # Estilos compartilhados entre páginas
+│   └── routes/
+│       └── AppRoutes.jsx    # Definição centralizada de rotas
+├── package.json
+└── .gitignore
 ```
+
+## Rotas
+
+| Rota            | Páginas           | Descrição                                      |
+|-----------------|-------------------|------------------------------------------------|
+| `/`             | `Home`            | Resumo de categorias, projetos e atividades    |
+| `/categorias`   | `Categorias`      | Listagem e CRUD de categorias                  |
+| `/projetos`     | `Projetos`        | Listagem e CRUD de projetos (com filtro)       |
+| `/projetos/:id` | `ProjetoDetalhe`  | Detalhe de um projeto e CRUD de atividades     |
+| `*`             | `NotFound`        | Página 404 para rotas não mapeadas             |
+
+## Estrutura de Dados (`dados.json`)
+
+```json
+{
+  "categorias":  [{ "id": 1, "nome": "Desenvolvimento" }],
+  "projetos":    [{ "id": 1, "nome": "Site Institucional", "descricao": "...", "categoria": { "id": 1, "nome": "Desenvolvimento" } }],
+  "atividades":  [{ "id": 1, "descricao": "Levantamento de requisitos", "data": "2025-01-10T10:00:00", "projeto": { "id": 1, "nome": "Site Institucional" } }]
+}
+```
+
 ## Instalação e Execução
 
 ### Pré-requisitos
@@ -39,78 +104,3 @@ npm install
 npm start
 ```
 A aplicação estará disponível em `http://localhost:3000`.
-
-<hr>
-A partir daqui, é documentação padrão do comando <code>npm init react-app frontend-projetos-react</code>
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
