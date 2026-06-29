@@ -7,8 +7,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+// Componentes reutilizados
 import Card  from '../components/Card';
 import Alert from '../components/Alert';
+import PageHeader from '../components/PageHeader';
+import ListaVazia from '../components/ListaVazia';
 import './Style.css';
 
 function Categorias({ categorias, projetos, onAdicionar, onEditar, onExcluir }) {
@@ -76,82 +79,85 @@ function Categorias({ categorias, projetos, onAdicionar, onEditar, onExcluir }) 
   return (
     <div className="pagina">
 
-      <div className="pagina-header">
-        <div>
-          <h1 className="pagina-titulo">Categorias</h1>
-          <p className="pagina-subtitulo">{categorias.length} cadastrada(s)</p>
-        </div>
+        {/* Cabeçalho da página - reutiliza pageheader */}
+        <PageHeader 
+            titulo="Categorias"
+            subtitulo={`${categorias.length} cadastrada(s)`}
+            acao={
+            modo === 'lista' && (
+                <button className="btn btn-primario" onClick={abrirFormNovo}>
+                + Nova categoria
+                </button>
+            )
+            }
+        />
+
+        <Alert tipo={alerta?.tipo} mensagem={alerta?.mensagem} />
+
+        {/* ── LISTA ── */}
         {modo === 'lista' && (
-          <button className="btn btn-primario" onClick={abrirFormNovo}>
-            + Nova categoria
-          </button>
-        )}
-      </div>
-
-      <Alert tipo={alerta?.tipo} mensagem={alerta?.mensagem} />
-
-      {/* ── LISTA ── */}
-      {modo === 'lista' && (
         <div className="lista-grid">
-          {categorias.length === 0 && (
-            <p className="lista-vazia">Nenhuma categoria cadastrada.</p>
-          )}
-          {categorias.map((cat) => {
+            {categorias.length === 0 && (
+            // Componente reutilizável apenas para informar mensagem ao usuário
+            <ListaVazia mensagem="Nenhuma categoria cadastrada. :(" />
+            // <p className="lista-vazia">Nenhuma categoria cadastrada.</p>
+            )}
+            {categorias.map((cat) => {
             const qtd = projetos.filter((p) => p.categoria.id === cat.id).length;
             return (
-              <Card
+                <Card
                 key={cat.id}
                 titulo={cat.nome}
                 subtitulo={`${qtd} projeto(s) nesta categoria`}
                 rodape={
-                  <>
+                    <>
                     <button className="btn btn-secundario" onClick={() => abrirFormEditar(cat)}>
-                      Editar
+                        Editar
                     </button>
                     <button className="btn btn-perigo" onClick={() => excluir(cat)}>
-                      Excluir
+                        Excluir
                     </button>
                     <button
-                      className="btn btn-aviso"
-                      onClick={() => navigate('/projetos', { state: { categoriaId: cat.id } })}
+                        className="btn btn-aviso"
+                        onClick={() => navigate('/projetos', { state: { categoriaId: cat.id } })}
                     >
-                      Ver projetos
+                        Ver projetos
                     </button>
-                  </>
+                    </>
                 }
-              />
+                />
             );
-          })}
+            })}
         </div>
-      )}
+        )}
 
-      {/* ── FORMULÁRIO ── */}
-      {modo === 'form' && (
+        {/* ── FORMULÁRIO ── */}
+        {modo === 'form' && (
         <div className="form-card">
-          <h2 className="form-titulo">
+            <h2 className="form-titulo">
             {editando ? 'Editar Categoria' : 'Nova Categoria'}
-          </h2>
+            </h2>
 
-          <div className="form-grupo">
+            <div className="form-grupo">
             <label className="form-label" htmlFor="nome-cat">Nome</label>
             <input
-              id="nome-cat"
-              className="form-input"
-              type="text"
-              placeholder="Ex: Desenvolvimento"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && salvar()}
-              autoFocus
+                id="nome-cat"
+                className="form-input"
+                type="text"
+                placeholder="Ex: Desenvolvimento"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && salvar()}
+                autoFocus
             />
-          </div>
+            </div>
 
-          <div className="form-acoes">
+            <div className="form-acoes">
             <button className="btn btn-secundario" onClick={cancelar}>Cancelar</button>
             <button className="btn btn-primario"   onClick={salvar}>Salvar</button>
-          </div>
+            </div>
         </div>
-      )}
+        )}
 
     </div>
   );
